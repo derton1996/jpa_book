@@ -1,5 +1,7 @@
 package org.caveat.emptor.model;
 
+import org.caveat.emptor.service.ZipcodeConverter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -20,6 +22,7 @@ public class User implements Serializable {
     private String lastname;
 
     @Embedded
+    @Convert(converter = ZipcodeConverter.class, attributeName = "zipcode")
     @AttributeOverrides({
             @AttributeOverride(name = "street", column = @Column(name = "HOME_STREET", nullable = false)),
             @AttributeOverride(name = "zipcode", column = @Column(name = "HOME_ZIPCODE", nullable = false, length = 5)),

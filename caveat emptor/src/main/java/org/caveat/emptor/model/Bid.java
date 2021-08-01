@@ -1,7 +1,6 @@
 package org.caveat.emptor.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -9,7 +8,14 @@ import java.io.Serializable;
 @org.hibernate.annotations.Immutable
 public class Bid implements Serializable {
 
-    protected Item item;
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    private Item item;
+
+    @Column(name = "price", length = 63)
+    private MonetaryAmount amount;
 
     public Bid() {
     }

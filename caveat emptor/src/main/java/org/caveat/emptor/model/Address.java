@@ -1,7 +1,9 @@
 package org.caveat.emptor.model;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import java.io.Serializable;
 
 @Embeddable
@@ -10,7 +12,7 @@ public class Address implements Serializable {
     @Column(name = "street", nullable = false)
     private String street;
 
-    @Column(name = "zipcode", nullable = false, length = 5)
+    @Column(name = "zipcode", nullable = false)
     private String zipcode;
 
     @Column(name = "city", nullable = false)
