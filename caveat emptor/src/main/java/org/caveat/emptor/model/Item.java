@@ -1,7 +1,6 @@
 package org.caveat.emptor.model;
 
 import com.sun.istack.internal.NotNull;
-import org.caveat.emptor.service.MonetaryAmountConverter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
@@ -29,10 +28,6 @@ public class Item implements Serializable {
     @Future
     private Date auctionEnd;
 
-    /**
-     * @Convert не обязяательна, так как в {@link MonetaryAmountConverter} уже выставлен autoApply
-     */
-    @Convert(converter = MonetaryAmountConverter.class, disableConversion = false)
     @org.hibernate.annotations.Type(type = "monetary_amount_usd")
     @org.hibernate.annotations.Columns(columns = {
             @Column( name="buy_now_price", nullable = false, length = 2),

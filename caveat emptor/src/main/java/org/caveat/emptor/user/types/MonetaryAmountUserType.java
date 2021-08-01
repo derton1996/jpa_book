@@ -22,6 +22,8 @@ import java.util.Properties;
  */
 public class MonetaryAmountUserType implements CompositeUserType, DynamicParameterizedType {
 
+    private static final BigDecimal RATIO_EUR = new BigDecimal("0.8");
+
     private Currency convertTo;
 
     @Override
@@ -70,7 +72,16 @@ public class MonetaryAmountUserType implements CompositeUserType, DynamicParamet
     }
 
     private MonetaryAmount convert(MonetaryAmount amount, Currency toCurrency) {
-        return new MonetaryAmount(amount.getValue().multiply(new BigDecimal(2)), toCurrency);
+        BigDecimal recountAmount = amount.getValue().multiply(multipleRatio(convertTo));
+        return new MonetaryAmount(recountAmount, toCurrency);
+    }
+
+    private BigDecimal multipleRatio(Currency currency) {
+        if ("EUR".equals(currency.getCurrencyCode())) {
+            return RATIO_EUR;
+        } else {
+            return BigDecimal.ONE;
+        }
     }
 
     @Override
